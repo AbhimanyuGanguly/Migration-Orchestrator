@@ -1,0 +1,14 @@
+{
+  "name": "sandbox_js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "dependencies": {
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0"
+  }
+}

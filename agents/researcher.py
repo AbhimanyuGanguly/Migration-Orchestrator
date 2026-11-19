@@ -1,5 +1,5 @@
 import os
-from langchain_mistralai import ChatMistralAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from tavily import TavilyClient
 from core.state import MigrationState
 
@@ -27,17 +27,17 @@ def research_migration(state: MigrationState) -> dict:
     {context_str}
     """
     
-    # Initialize Mistral via ChatMistralAI
+    # Initialize Gemini as primary LLM
     try:
-        mistral_api_key = os.environ.get("MISTRAL_API_KEY")
-        llm = ChatMistralAI(
-            model="mistral-small-latest",
-            mistral_api_key=mistral_api_key,
+        gemini_api_key = os.environ.get("GEMINI_API_KEY")
+        llm = ChatGoogleGenerativeAI(
+            model="gemini-3.8-flash",
+            google_api_key=gemini_api_key,
             max_retries=3
         )
         response = llm.invoke(prompt)
     except Exception as e:
-        print(f"   ⚠️  Mistral API failed ({e}). Falling back to Groq (openai/gpt-oss-120b)...")
+        print(f"   ⚠️  Gemini API failed ({e}). Falling back to Groq (openai/gpt-oss-120b)...")
         from langchain_openai import ChatOpenAI
         groq_api_key = os.environ.get("GROQ_API_KEY")
         llm = ChatOpenAI(

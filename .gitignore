@@ -47,3 +47,5 @@ ENV/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+.INTERVIEW_PREP.md
